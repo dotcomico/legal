@@ -308,11 +308,6 @@
           <td>No</td>
         </tr>
         <tr>
-          <td><code>ACCESS_WIFI_STATE</code></td>
-          <td>Supplementary connectivity check, used alongside ACCESS_NETWORK_STATE.</td>
-          <td>No</td>
-        </tr>
-        <tr>
           <td><code>POST_NOTIFICATIONS</code></td>
           <td>Send a local on-device notification displaying the room route the user searched for. No notification content leaves the Device.</td>
           <td>No</td>
@@ -432,6 +427,11 @@
           <td>Room route text is passed to the WhatsApp app on your Device via Android's Share Intent — only if you initiate the share</td>
           <td>None — governed by WhatsApp/Meta's Privacy Policy</td>
         </tr>
+        <tr>
+          <td><strong>dotcomico.github.io</strong><br/>This Privacy Policy</td>
+          <td>Opened in your Device's browser when you tap "Privacy Policy" inside the App (About screen). The policy document is hosted on GitHub Pages. GitHub may log standard server-access metadata (IP address, browser user-agent) per their own privacy policy.</td>
+          <td>None — governed by <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank">GitHub's Privacy Statement</a></td>
+        </tr>
       </tbody>
     </table>
 
@@ -454,18 +454,24 @@
   <section id="s8">
     <h2>8. Android Backup</h2>
     <p>
-      The App's manifest has <code>android:allowBackup="true"</code> enabled. This means Android
-      may back up the App's unencrypted SharedPreferences data (schedule, display preferences) to
-      your Google account as part of Android's standard device backup feature.
+      The App's manifest has <code>android:allowBackup="true"</code> enabled, but the App
+      explicitly opts <strong>all</strong> SharedPreferences files out of Android Backup across
+      all API levels:
+    </p>
+    <ul>
+      <li><code>backup_rules.xml</code> (Android 6–11) excludes <code>MyUserPref.xml</code> and <code>MyUserPref_enc.xml</code></li>
+      <li><code>data_extraction_rules.xml</code> (Android 12+) excludes the same files from both cloud backup and device-to-device transfer</li>
+    </ul>
+    <p>
+      Specifically: <code>MyUserPref.xml</code> holds your class schedule (stored as a JSON string),
+      dark mode preference, and any transient room route data. <code>MyUserPref_enc.xml</code> holds
+      your locker code, cabinet number, and cell number in AES-256-GCM encrypted form. Both files
+      are fully excluded — no partial key filtering is applied or needed.
     </p>
     <p>
-      <strong>Encrypted data (locker code, cabinet, cell number) is excluded from Android backup</strong>
-      by design — the Android Keystore keys used for encryption are non-exportable and cannot be
-      restored to a different device, making encrypted data effectively irretrievable from backup.
-    </p>
-    <p>
-      Control over Android backup is in your Device's system settings (Settings → Google → Backup).
-      The Developer does not independently receive or access any backup data.
+      As a result, <strong>no App data — including locker data, schedule, or display preferences —
+      is ever backed up to your Google account or transferred to another device.</strong>
+      The Developer does not receive or access any data through Android Backup.
     </p>
   </section>
 
@@ -734,7 +740,7 @@
 
   <footer>
     <p>© 2026 Kashnik (קשניק). All rights reserved.</p>
-    <p style="margin-top:6px">Effective: April 11, 2026 &nbsp;|&nbsp; Jurisdiction: Israel &nbsp;|&nbsp; App version: 2.1 (versionCode 14)</p>
+    <p style="margin-top:6px">Effective: April 11, 2026 &nbsp;|&nbsp; Jurisdiction: Israel &nbsp;|&nbsp; App version: 2.2 (versionCode 15)</p>
   </footer>
 
 </div>
