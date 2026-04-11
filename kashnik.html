@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<!-- a11y: israel-rtl -->
+<html lang="en" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -47,7 +48,7 @@
       margin-bottom: 28px;
     }
     header h1 { font-size: 1.7rem; margin-bottom: 6px; }
-    header .meta { font-size: 0.88rem; opacity: 0.82; margin-top: 4px; }
+    header .meta { font-size: 0.88rem; color: rgba(255,255,255,0.95); margin-top: 4px; }
 
     .toc {
       background: var(--surface);
@@ -120,7 +121,7 @@
       background: var(--accent);
       color: #fff;
       padding: 9px 12px;
-      text-align: left;
+      text-align: start;
     }
     td {
       padding: 9px 12px;
@@ -143,25 +144,76 @@
       margin-top: 48px;
       padding-top: 20px;
       border-top: 1px solid var(--border);
-      font-size: 0.82rem;
+      font-size: 0.875rem;
       color: var(--muted);
       text-align: center;
+    }
+
+    /* ── Accessibility (IS 5568 / WCAG 2.1 AA) ── */
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+    }
+
+    /* Skip-to-content link — hidden until focused */
+    .skip-link {
+      position: absolute;
+      top: -56px;
+      left: 16px;
+      background: var(--accent);
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 0 0 8px 8px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      z-index: 1000;
+      transition: top 0.2s ease;
+    }
+    .skip-link:focus {
+      top: 0;
+      outline: 3px solid #fff;
+      outline-offset: 3px;
+    }
+
+    /* Visually hidden — readable by screen readers */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* Visible focus ring for keyboard navigation */
+    a:focus-visible,
+    button:focus-visible,
+    [tabindex="0"]:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 3px;
     }
   </style>
 </head>
 <body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
 <div class="container">
 
   <!-- ─── HEADER ─── -->
   <header>
     <h1>Privacy Policy</h1>
     <p>Application: <strong>Kashnik (קשניק)</strong></p>
-    <p class="meta">Effective date: April 11, 2026 &nbsp;|&nbsp; Developer jurisdiction: Israel &nbsp;|&nbsp; Package: <code style="background:rgba(255,255,255,0.15);border:none;color:#fff">com.myappname.kashniks</code></p>
+    <p class="meta">Effective date: April 11, 2026 &nbsp;|&nbsp; Developer jurisdiction: Israel &nbsp;|&nbsp; Package: <code style="background:rgba(0,0,0,0.25);border:none;color:#fff">com.myappname.kashniks</code></p>
   </header>
 
   <!-- ─── TABLE OF CONTENTS ─── -->
-  <div class="toc">
-    <h3>Contents</h3>
+  <nav class="toc" aria-label="Table of contents">
+    <!-- a11y: heading-order -->
+    <h2>Contents</h2>
     <ol>
       <li><a href="#s1">Interpretation and Definitions</a></li>
       <li><a href="#s2">Data We Collect and How</a></li>
@@ -181,10 +233,12 @@
       <li><a href="#s16">Changes to This Policy</a></li>
       <li><a href="#s17">Contact</a></li>
     </ol>
-  </div>
+  </nav>
+
+  <main id="main-content">
 
   <!-- ─── HEBREW SUMMARY ─── -->
-  <div class="hebrew-summary">
+  <div class="hebrew-summary" lang="he">
     <h2>סיכום בעברית — תקציר מדיניות הפרטיות</h2>
     <p>
       האפליקציה <strong>קשניק</strong> אינה אוספת, שולחת, או מוכרת שום מידע אישי לגורמים חיצוניים.
@@ -239,7 +293,7 @@
     <h3>2.1 Data You Provide Voluntarily</h3>
     <table>
       <thead>
-        <tr><th>Data Item</th><th>Purpose</th><th>Storage</th></tr>
+        <tr><th scope="col">Data Item</th><th scope="col">Purpose</th><th scope="col">Storage</th></tr>
       </thead>
       <tbody>
         <tr>
@@ -307,7 +361,7 @@
     <p>The App declares the following permissions in its Android manifest. Each permission is used only as described below:</p>
     <table>
       <thead>
-        <tr><th>Permission</th><th>Actual Use</th><th>Collects Data?</th></tr>
+        <tr><th scope="col">Permission</th><th scope="col">Actual Use</th><th scope="col">Collects Data?</th></tr>
       </thead>
       <tbody>
         <tr>
@@ -412,7 +466,7 @@
 
     <table>
       <thead>
-        <tr><th>Service / URL</th><th>How Accessed</th><th>Developer Control</th></tr>
+        <tr><th scope="col">Service / URL</th><th scope="col">How Accessed</th><th scope="col">Developer Control</th></tr>
       </thead>
       <tbody>
         <tr>
@@ -443,7 +497,7 @@
         <tr>
           <td><strong>dotcomico.github.io</strong><br/>This Privacy Policy</td>
           <td>Opened in your Device's browser when you tap "Privacy Policy" inside the App (About screen). The policy document is hosted on GitHub Pages. GitHub may log standard server-access metadata (IP address, browser user-agent) per their own privacy policy.</td>
-          <td>None — governed by <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank">GitHub's Privacy Statement</a></td>
+          <td>None — governed by <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener noreferrer" aria-label="GitHub's Privacy Statement (opens in new tab)">GitHub's Privacy Statement<span class="sr-only"> (opens in new tab)</span></a></td>
         </tr>
       </tbody>
     </table>
@@ -606,7 +660,7 @@
     </p>
     <table>
       <thead>
-        <tr><th>Right</th><th>How to Exercise It</th></tr>
+        <tr><th scope="col">Right</th><th scope="col">How to Exercise It</th></tr>
       </thead>
       <tbody>
         <tr>
@@ -727,6 +781,8 @@
     </ul>
     <p>We will respond to all inquiries within a reasonable time.</p>
   </section>
+
+  </main>
 
   <footer>
     <p>© 2026 Kashnik (קשניק). All rights reserved.</p>
