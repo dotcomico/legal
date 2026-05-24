@@ -217,6 +217,7 @@
       <li><a href="#s9">Third-Party Services and External Links</a></li>
       <li><a href="#s10">Data We Do Not Collect</a></li>
       <li><a href="#s11">Data Retention and Deletion</a></li>
+      <li><a href="#delete">How to Delete Your Data</a></li>
       <li><a href="#s12">Children's Privacy</a></li>
       <li><a href="#s13">Applicable Law — Israel</a></li>
       <li><a href="#s14">Your Rights Under Israeli Law</a></li>
@@ -253,7 +254,9 @@
     </p>
     <p>
       בהתאם לחוק הגנת הפרטיות (תיקון 13), תשמ"א-1981, יש לך זכות לעיין במידע שנשמר,
-      לתקנו ולמחוק אותו. ניתן לממש זכויות אלה ישירות דרך האפליקציה (תפריט ← מחיקת היסטוריה)
+      לתקנו ולמחוק אותו. ניתן לממש זכויות אלה ישירות דרך האפליקציה
+      (תפריט ← <strong>מחיקת היסטוריה</strong> למחיקת ההיסטוריה בלבד,
+      או תפריט ← <strong>מחק את כל הנתונים</strong> למחיקת כל הנתונים וההגדרות)
       או על ידי הסרת האפליקציה.
     </p>
   </div>
@@ -314,6 +317,11 @@
         <tr>
           <td>Display theme preference</td>
           <td>Remember your chosen light or dark mode</td>
+          <td>Plaintext Local Storage on Device only</td>
+        </tr>
+        <tr>
+          <td>Send mode preference</td>
+          <td>Remember whether you prefer single-send or floating-widget (continuous) mode</td>
           <td>Plaintext Local Storage on Device only</td>
         </tr>
       </tbody>
@@ -396,9 +404,9 @@
       beyond the foreground-service channel described in Section 6.
     </p>
     <p>
-      Three permissions — <code>READ_PHONE_STATE</code>, <code>READ_CALL_LOG</code>, and
-      <code>READ_CONTACTS</code> — are commented out in the manifest. They were used by a deleted
-      feature and are entirely inactive. They are not granted to the App and the App never requests them.
+      The App does <strong>not</strong> declare <code>READ_PHONE_STATE</code>, <code>READ_CALL_LOG</code>,
+      or <code>READ_CONTACTS</code> in any form. These were used by a deleted feature and have been
+      fully removed from the manifest.
     </p>
   </section>
 
@@ -430,7 +438,7 @@
       All data is stored in two standard Android <code>SharedPreferences</code> files on your Device:
     </p>
     <ul>
-      <li><code>MyUserPref</code> — stores your WhatsApp variant choice, selected country code, and display theme</li>
+      <li><code>MyUserPref</code> — stores your WhatsApp variant choice, selected country code, display theme, and send mode preference</li>
       <li><code>shared preferences</code> — stores your message history as a Gson-serialized JSON array of phone number and message pairs</li>
     </ul>
     <p>
@@ -547,7 +555,8 @@
     <h3>11.2 Deletion by You</h3>
     <p>You can delete all locally stored data in any of the following ways:</p>
     <ul>
-      <li><strong>In-App (history):</strong> Tap the menu icon (⋮) → <strong>Clear History</strong>. This removes all saved phone numbers and messages.</li>
+      <li><strong>In-App (history only):</strong> Tap the menu icon (⋮) → <strong>Clear History</strong>. This removes all saved phone numbers and messages, but keeps your preferences (country code, WhatsApp type, theme, send mode).</li>
+      <li><strong>In-App (everything):</strong> Tap the menu icon (⋮) → <strong>Delete All Data</strong>. After a confirmation prompt, this permanently wipes all SharedPreferences — both message history and all settings — and resets the App to its defaults.</li>
       <li><strong>Device Settings:</strong> Go to Settings → Apps → QuickSend for WhatsApp → Storage → Clear Data. This removes all App data including preferences.</li>
       <li><strong>Uninstall:</strong> Uninstalling the App removes all associated data from your Device permanently.</li>
     </ul>
@@ -557,6 +566,25 @@
       If you contact us by email, we retain your correspondence for as long as necessary to resolve
       your inquiry. You may request deletion of email correspondence by contacting us at
       <strong>dotan.simantov.dev@gmail.com</strong>.
+    </p>
+  </section>
+
+  <!-- HOW TO DELETE YOUR DATA -->
+  <section id="delete">
+    <h2 id="delete">How to Delete Your Data</h2>
+    <p>
+      QuickSend WhatsApp stores your message history (phone numbers and messages)
+      locally on your device only. No data is sent to any server.
+    </p>
+    <p>To delete all your data:</p>
+    <ol>
+      <li>Open the <strong>QuickSend WhatsApp</strong> app</li>
+      <li>Tap the <strong>menu icon</strong> (three dots) in the top right</li>
+      <li>Select <strong>"Delete all data"</strong></li>
+      <li>Confirm — all saved history and settings will be permanently erased</li>
+    </ol>
+    <p>
+      After deletion, the app contains no information about you whatsoever.
     </p>
   </section>
 
@@ -625,7 +653,7 @@
         </tr>
         <tr>
           <td>Delete your data</td>
-          <td>Menu (⋮) → Clear History, or Device Settings → Clear Data, or uninstall the App (see Section 11).</td>
+          <td>Menu (⋮) → <strong>Clear History</strong> (history only) or <strong>Delete All Data</strong> (everything), or Device Settings → Clear Data, or uninstall the App (see Section 11).</td>
         </tr>
         <tr>
           <td>Object to processing</td>
