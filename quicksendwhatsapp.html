@@ -199,7 +199,7 @@
   <header>
     <h1>Privacy Policy</h1>
     <p>Application: <strong>QuickSend for WhatsApp</strong></p>
-    <p class="meta">Effective date: May 23, 2026 &nbsp;|&nbsp; Developer jurisdiction: Israel &nbsp;|&nbsp; Package: <code style="background:rgba(0,0,0,0.25);border:none;color:#fff">com.dotcom.quicksendwhatsapp</code></p>
+    <p class="meta">Effective date: September 17, 2026 &nbsp;|&nbsp; Developer jurisdiction: Israel &nbsp;|&nbsp; Package: <code style="background:rgba(0,0,0,0.25);border:none;color:#fff">com.dotcom.quicksendwhatsapp</code></p>
   </header>
 
   <!-- TABLE OF CONTENTS -->
@@ -400,13 +400,26 @@
     </table>
     <p>
       The App does <strong>not</strong> request or use: Camera, Microphone, Location (fine or coarse),
-      Contacts, Call Logs, SMS, Calendar, Biometrics, External Storage, or any notification permission
+      Call Logs, SMS, Calendar, Biometrics, External Storage, or any notification permission
       beyond the foreground-service channel described in Section 6.
     </p>
     <p>
       The App does <strong>not</strong> declare <code>READ_PHONE_STATE</code>, <code>READ_CALL_LOG</code>,
-      or <code>READ_CONTACTS</code> in any form. These were used by a deleted feature and have been
-      fully removed from the manifest.
+      or <code>READ_CONTACTS</code> in any form. The App does, however, include an optional contact
+      picker: when you tap it, Android's own built-in Contacts picker opens (<code>ACTION_PICK</code>),
+      and you choose a single contact. The App never gets bulk access to your contacts list — it only
+      receives the one phone number you selected, which is then handled exactly like a number you typed
+      in manually. No contacts data is stored, transmitted, or retained beyond that single number.
+    </p>
+
+    <h3>5.1 App Shortcuts</h3>
+    <p>
+      The App registers optional Android launcher shortcuts (long-press the App icon to see them):
+      a static shortcut to open the floating widget, and a dynamic shortcut that lets you quickly
+      re-send to the last phone number you used. The dynamic shortcut's label displays that phone
+      number so you can recognize it on your home screen or app-icon menu. Shortcut data is generated
+      and stored entirely on your Device by Android's own shortcut system — it is not transmitted
+      anywhere and is removed automatically when the App is uninstalled.
     </p>
   </section>
 
@@ -513,6 +526,15 @@
       Any information you include (such as your name, email address, or device model) is used
       solely to respond to your inquiry and is not shared with third parties.
     </p>
+
+    <h3>9.2 Export and Import of Message History</h3>
+    <p>
+      The App lets you export your on-device message history to a JSON file and share it via
+      Android's built-in share sheet (using a <code>FileProvider</code>), and import that file back
+      in later. This is entirely a local, on-device operation initiated by you — the Developer does
+      not receive, store, or have access to the exported file. Where the file goes (which app you
+      share it to, or where you save it) is entirely your choice.
+    </p>
   </section>
 
   <!-- SECTION 10 -->
@@ -527,7 +549,7 @@
       <li>IP address or device network identifiers</li>
       <li>Device advertising ID (GAID) or any persistent device identifier</li>
       <li>Location data (GPS, network-based, or IP-based)</li>
-      <li>Device contacts or call logs</li>
+      <li>Your device contacts list in bulk, or call logs (the optional contact picker described in Section 5 only returns the single phone number you choose)</li>
       <li>Camera or microphone data</li>
       <li>Browsing history or app usage analytics</li>
       <li>Crash reports or diagnostic telemetry</li>
@@ -753,7 +775,7 @@
 
   <footer>
     <p>&copy; 2026 QuickSend for WhatsApp. All rights reserved.</p>
-    <p style="margin-top:6px">Effective: May 23, 2026 &nbsp;|&nbsp; Jurisdiction: Israel &nbsp;|&nbsp; App version: 2.0 (versionCode 5)</p>
+    <p style="margin-top:6px">Effective: September 17, 2026 &nbsp;|&nbsp; Jurisdiction: Israel &nbsp;|&nbsp; App version: 2.1 (versionCode 8)</p>
   </footer>
 
 </div>
